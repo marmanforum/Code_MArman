@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Modern</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+    .calculator {
+      background: #222;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      width: 320px;
+      transition: 0.3s;
+    }
+    .display {
+      background: #111;
+      color: #0f0;
+      font-size: 28px;
+      text-align: right;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #333;
+      color: white;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #555;
+    }
+    .operator {
+      background: #f39c12;
+    }
+    .operator:hover {
+      background: #d68910;
+    }
+    .equal {
+      background: #27ae60;
+      grid-column: span 2;
+    }
+    .equal:hover {
+      background: #1e8449;
+    }
+    .clear {
+      background: #e74c3c;
+    }
+    .clear:hover {
+      background: #c0392b;
+    }
+    .mode-toggle {
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    .mode-toggle button {
+      padding: 6px 12px;
+      font-size: 14px;
+      background: #555;
+    }
+
+    /* Light Mode */
+    body.light {
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+    }
+    body.light .calculator {
+      background: #f9f9f9;
+      color: #000;
+    }
+    body.light .display {
+      background: #fff;
+      color: #000;
+    }
+    body.light button {
+      background: #ddd;
+      color: #000;
+    }
+    body.light button:hover {
+      background: #bbb;
+    }
+    body.light .operator {
+      background: #ff9800;
+      color: #fff;
+    }
+    body.light .equal {
+      background: #4caf50;
+      color: #fff;
+    }
+    body.light .clear {
+      background: #f44336;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="mode-toggle">
+      <button onclick="toggleMode()">🌙/☀️</button>
+    </div>
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('%')">%</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="equal" onclick="calculateResult()">=</button>
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+
+    function appendValue(value) {
+      if (display.innerText === "0") {
+        display.innerText = value;
+      } else {
+        display.innerText += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function calculateResult() {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("light");
+    }
+  </script>
+</body>
+</html>
